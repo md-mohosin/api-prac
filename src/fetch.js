@@ -1,4 +1,5 @@
 const cardContainer = document.getElementById("card-container")
+const singleUser = document.getElementById("single-user")
 
 
 fetch('https://jsonplaceholder.typicode.com/posts')
@@ -46,8 +47,8 @@ cardContainer.addEventListener("click", function (e) {
       <h1 class="user-info-heading">User information</h1>
       <div class="user-info-card">
         <div class="name-id">
-          <p class="user-name"><span class="heading">Name:</span></p>
-          <p class="id"><span class="heading">ID:</span></p>
+          <p class="user-name"><span class="heading">Name:${user.name}</span></p>
+          <p class="id"><span class="heading">ID:${user.id}</span></p>
         </div>
         <div class="email-info">
           <p><span class="heading">Username:</span></p>
@@ -58,10 +59,9 @@ cardContainer.addEventListener("click", function (e) {
           <p><span class="heading">Website:</span></p>
         </div>
       </div>
-      <button class="back-btn" id="back">Back</button>
     </div>
                 `
-                userIfno.appendChild(div)
+                singleUser.appendChild(div)
             })
     }
 })
@@ -72,4 +72,5 @@ cardContainer.addEventListener("click", function (e) {
 document.getElementById('back').addEventListener("click", () => {
     userIfno.style.display = 'none'
     document.getElementById("all-cards").style.display = 'block'
+    singleUser.innerHTML=''
 })
