@@ -28,21 +28,6 @@ const backBtn = document.getElementById("back")
 //     )
 
 
-// ROUTER FUNCTION
-
-function router() {
-    const path = window.location.pathname
-    if (path === '/' || path === '') {
-        showPost()
-    }
-    else if (path.startsWith("/user/")) {
-        const userId = path.split("/")[2]
-        showUser(userId)
-    }
-}
-
-
-
 
 // const userIfno = document.getElementById("user-info")
 // cardContainer.addEventListener("click", function (e) {
@@ -81,6 +66,34 @@ function router() {
 // })
 
 
+// document.getElementById('back').addEventListener("click", () => {
+//     userIfno.style.display = 'none'
+//     document.getElementById("all-cards").style.display = 'block'
+//     singleUser.innerHTML = ''
+// })
+
+
+
+
+
+
+
+
+
+// // ROUTER FUNCTION
+function router() {
+    const path = window.location.pathname
+    if (path === '/' || path === '') {
+        showPost()
+    }
+    else if (path.startsWith("/user/")) {
+        const userId = path.split("/")[2]
+        showUser(userId)
+    }
+}
+
+
+
 
 // SHOW POSTS
 function showPost() {
@@ -91,24 +104,27 @@ function showPost() {
     fetch("https://jsonplaceholder.typicode.com/posts")
         .then(res => res.json())
         .then(data => {
-            data.forEach(post => {
+            const randomData = data.sort(() => 0.5 - Math.random()).slice(1, 11)
+            randomData.forEach(post => {
                 const div = document.createElement("div")
                 div.className = 'card'
 
                 div.innerHTML = `
-             <h3>Post ID: ${post.id}</h3>
-          <p>${post.title}</p>
-          <button class="details-btn" data-userid="${post.userId}">
-            Details
-          </button>
+                <div style="display: flex; justify-content: space-between;color: rgb(14, 112, 14);">
+                    <h3 class="id">Post ID:${post.id}</h3>
+                    <h3 class="id">User ID:${post.userId}</h3>
+                </div>
+                <div>
+                    <p><span class="heading">Title:</span>${post.title}</p>
+                    <p><span class="heading">Description:</span>${post.body} </p>
+                    <a class="details-btn" href="" data-userId="${post.userId}">Details</a>
+                </div>
+            </div>
             `
                 cardContainer.appendChild(div)
             })
         })
 }
-
-
-
 
 
 
@@ -122,22 +138,32 @@ function showUser(userId) {
         .then(res => res.json())
         .then(user => {
             singleUser.innerHTML = `
-        <h2>${user.name}</h2>
-        <p><b>Username:</b> ${user.username}</p>
-        <p><b>Email:</b> ${user.email}</p>
-        <p><b>Phone:</b> ${user.phone}</p>
-        <p><b>Website:</b> ${user.website}</p>
+        <div class="info">
+      <h1 class="user-info-heading">User information</h1>
+      <div class="user-info-card">
+        <div class="name-id">
+          <p class="user-name"><span class="heading">Name:</span>${user.name}</p>
+          <p class="id"><span class="heading">ID:</span>${user.id}</p>
+        </div>
+        <div class="email-info">
+          <p><span class="heading">Username:</span>${user.username}</p>
+          <p><span class="heading">Eamil:</span>${user.email}</p>
+        </div>
+        <div class="phone-info">
+          <p><span class="heading">Phone:</span>${user.phone}</p>
+          <p><span class="heading">Website:</span>${user.website}</p>
+        </div>
+      </div>
+    </div>
       `
         })
 }
 
 
 
-
-
-
 // CLICK HANDLING
 cardContainer.addEventListener("click", e => {
+    e.preventDefault()
     if (e.target.classList.contains("details-btn")) {
         const userId = e.target.dataset.userid;
 
@@ -148,25 +174,17 @@ cardContainer.addEventListener("click", e => {
 
 
 
-
 //   BACK BUTTON
-backBtn.addEventListener("click",()=>{
-    history.pushState({},"","/")
+backBtn.addEventListener("click", () => {
+    history.pushState({}, "", "/")
     showPost()
 })
 
 
 
 window.onpopstate = () => {
-  router();
+    router();
 };
 
 
 router()
-
-
-// document.getElementById('back').addEventListener("click", () => {
-//     userIfno.style.display = 'none'
-//     document.getElementById("all-cards").style.display = 'block'
-//     singleUser.innerHTML = ''
-// })
