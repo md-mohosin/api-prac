@@ -68,7 +68,7 @@ body {
 
 .user-info-card {
     border: 1px solid rgb(224, 9, 210);
-    width: 600px;
+    width: 680px;
     padding: 20px;
     border-radius: 13px;
 }
@@ -84,6 +84,7 @@ body {
     border: 1px solid blueviolet;
     border-radius: 9px;
     transition: 0.2s;
+    display: flex;justify-self: center;
 }
 
 .back-btn:hover {

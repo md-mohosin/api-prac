@@ -47,16 +47,16 @@ cardContainer.addEventListener("click", function (e) {
       <h1 class="user-info-heading">User information</h1>
       <div class="user-info-card">
         <div class="name-id">
-          <p class="user-name"><span class="heading">Name:${user.name}</span></p>
-          <p class="id"><span class="heading">ID:${user.id}</span></p>
+          <p class="user-name"><span class="heading">Name:</span>${user.name}</p>
+          <p class="id"><span class="heading">ID:</span>${user.id}</p>
         </div>
         <div class="email-info">
-          <p><span class="heading">Username:</span></p>
-          <p><span class="heading">Eamil:</span></p>
+          <p><span class="heading">Username:</span>${user.username}</p>
+          <p><span class="heading">Eamil:</span>${user.email}</p>
         </div>
         <div class="phone-info">
-          <p><span class="heading">Phone:</span></p>
-          <p><span class="heading">Website:</span></p>
+          <p><span class="heading">Phone:</span>${user.phone}</p>
+          <p><span class="heading">Website:</span>${user.website}</p>
         </div>
       </div>
     </div>
